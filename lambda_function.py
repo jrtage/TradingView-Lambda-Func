@@ -1,9 +1,5 @@
 import json
 import requests
-import hmac
-import hashlib
-import base64
-import time
 import balance
 import liveprice
 import trade
@@ -23,12 +19,14 @@ def long():
 def short():
     bal = balance.balances('ETH')
     if bal == None:
-        bal = 0
+        return
 
-    trade.execTrade(assetChart, 'sell', bal)
+    trade.execTrade(assetChart, 'sell', 1)
 
 def lambda_handler(event, context):
     print("Hello, World!")
     return {
         'statusCode': 200
     }
+
+short()
