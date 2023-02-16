@@ -6,19 +6,26 @@ import base64
 import time
 import balance
 import liveprice
+import trade
 
+# Declare which chart to grab live price info from
+assetChart = 'ethusd'
 
 def long():
     bal = balance.balances('USD')
-    currentPrice = liveprice.currentPrice('ethusd')
-    maxAsset = bal/currentPrice
-    if maxAsset <= 10:
-        pass
-    else:
-        pass
+    currentPrice = liveprice.currentPrice(assetChart)
+    maxAsset = (bal/currentPrice) * 0.99
+    if maxAsset > 10:
+        maxAsset = 10
+
+    trade.execTrade(assetChart, 'buy', maxAsset)
 
 def short():
-    pass
+    bal = balance.balances('ETH')
+    if bal == None:
+        bal = 0
+
+    trade.execTrade(assetChart, 'sell', bal)
 
 def lambda_handler(event, context):
     print("Hello, World!")

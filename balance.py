@@ -6,33 +6,33 @@ import base64
 import time
 import api
 
-# Set your API credentials
-api_key = api.apiKey()
-api_secret = api.apiSecret()
-
-
-
-# Set the API endpoint and request parameters
-endpoint = api.balEndpoint()
-nonce = str(int(time.time() * 1000))
-payload = {'request': '/v1/balances', 'nonce': nonce}
-
-# Generate the signature using the payload and API secret
-payload_json = json.dumps(payload)
-payload_b64 = base64.b64encode(payload_json.encode('utf-8'))
-signature = hmac.new(api_secret, payload_b64, hashlib.sha384).hexdigest()
-
-# Set the headers for the request
-headers = {
-    'Content-Type': 'text/plain',
-    'Content-Length': '0',
-    'X-GEMINI-APIKEY': api_key,
-    'X-GEMINI-PAYLOAD': payload_b64,
-    'X-GEMINI-SIGNATURE': signature
-}
-
 # Send the request and print the response
 def balances(currencySymbol):
+    # Set your API credentials
+    api_key = api.apiKey()
+    api_secret = api.apiSecret()
+
+
+
+    # Set the API endpoint and request parameters
+    endpoint = api.balEndpoint()
+    nonce = str(int(time.time() * 1000))
+    payload = {'request': '/v1/balances', 'nonce': nonce}
+
+    # Generate the signature using the payload and API secret
+    payload_json = json.dumps(payload)
+    payload_b64 = base64.b64encode(payload_json.encode('utf-8'))
+    signature = hmac.new(api_secret, payload_b64, hashlib.sha384).hexdigest()
+
+    # Set the headers for the request
+    headers = {
+        'Content-Type': 'text/plain',
+        'Content-Length': '0',
+        'X-GEMINI-APIKEY': api_key,
+        'X-GEMINI-PAYLOAD': payload_b64,
+        'X-GEMINI-SIGNATURE': signature
+    }
+
     asset_balance = None
     response = requests.post(endpoint, headers=headers)
     if response.status_code == 200:
