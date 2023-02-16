@@ -1,5 +1,5 @@
 api = 'API KEY HERE'
-secret = 'SECRET KEY HERE'
+secret = b'SECRET KEY HERE'
 balUrl = 'https://api.sandbox.gemini.com/v1/balances'
 tradeUrl = 'https://api.sandbox.gemini.com/v1/order/new'
 priceUrl = 'https://api.gemini.com/v1/pubticker/'
