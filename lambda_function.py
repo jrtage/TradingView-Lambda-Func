@@ -1,7 +1,21 @@
 import json
+import requests
+import hmac
+import hashlib
+import base64
+import time
+import balance
+import liveprice
+
 
 def long():
-    pass
+    bal = balance.balances('USD')
+    currentPrice = liveprice.currentPrice('ethusd')
+    maxAsset = bal/currentPrice
+    if maxAsset <= 10:
+        pass
+    else:
+        pass
 
 def short():
     pass
