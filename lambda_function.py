@@ -1,5 +1,4 @@
 import json
-import requests
 import balance
 import liveprice
 import trade
