@@ -23,9 +23,6 @@ def short():
     trade.execTrade(assetChart, 'sell', 1)
 
 def lambda_handler(event, context):
-    print("Hello, World!")
-    return {
-        'statusCode': 200
-    }
+    pass
 
 short()

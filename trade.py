@@ -20,6 +20,7 @@ def execTrade(symbol, side, amount):
     if side == 'sell':
         price = price * 0.995
     order_type = 'exchange limit'
+    price = round(price, 2)
 
     # Set the order payload
     payload = {
