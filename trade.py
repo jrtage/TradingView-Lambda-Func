@@ -8,18 +8,12 @@ import api
 import liveprice
 
 
-def execTrade(symbol, side, amount):
+def execTrade(symbol, side, amount, price):
     # Set your API credentials
 
 
     # Set the Sandbox API endpoint and request parameters
     nonce = str(int(time.time() * 1000))
-    price = (liveprice.currentPrice(symbol))
-    if side == 'buy':
-        price = price * 1.005
-    if side == 'sell':
-        price = price * 0.995
-    order_type = 'exchange limit'
     price = round(price, 2)
 
     # Set the order payload
@@ -30,7 +24,7 @@ def execTrade(symbol, side, amount):
         'amount': amount,
         'price': price,
         'side': side,
-        'type': order_type,
+        'type': 'exchange limit'
     }
 
     # Generate the signature using the payload and API secret
