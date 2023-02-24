@@ -53,3 +53,4 @@ def execTrade(symbol, side, amount, price):
             print('Error: Empty response')
     else:
         print(f'Error: Request failed with status code {response.status_code}')
+        print(response.json())
