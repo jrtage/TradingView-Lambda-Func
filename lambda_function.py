@@ -17,7 +17,7 @@ def long(price):
 
 def short(price):
     bal = balance.balances('ETH')
-    if bal == 0:
+    if bal < 0.01:
         print('No Assets Available To Sell')
         return
 
@@ -32,3 +32,4 @@ def lambda_handler(event, context):
     if body_json['strategy'] == 'sell':
         short(price)
 
+long(liveprice.currentPrice(assetChart))

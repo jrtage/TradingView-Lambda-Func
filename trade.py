@@ -15,7 +15,10 @@ def execTrade(symbol, side, amount, price):
     # Set the Sandbox API endpoint and request parameters
     nonce = str(int(time.time() * 1000))
     price = round(price, 2)
-
+    if side == 'buy':
+        price += 0.02
+    if side == 'buy':
+        price -= 0.02
     # Set the order payload
     payload = {
         'request': '/v1/order/new',

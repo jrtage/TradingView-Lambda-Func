@@ -20,4 +20,11 @@ trade.py:
 executes a buy or sell order dependant on parameters. Configured for market orders
 Parameters: asset market ('ethusd')
             buy or sell ('buy' or 'sell')
-            amount of asset to buy (integer)
+            amount of asset to buy (float)
+            price to buy asset at (float)
+
+ADD THIS AS YOUR TRADINGVIEW ALERT MESSAGE:
+{
+"price": "{{close}}", 
+"strategy": "{{strategy.order.action}}"
+}
