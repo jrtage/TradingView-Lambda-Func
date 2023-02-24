@@ -16,9 +16,9 @@ def execTrade(symbol, side, amount, price):
     nonce = str(int(time.time() * 1000))
     price = round(price, 2)
     if side == 'buy':
-        price += 0.02
-    if side == 'buy':
-        price -= 0.02
+        price += 1
+    if side == 'sell':
+        price -= 1
     # Set the order payload
     payload = {
         'request': '/v1/order/new',
@@ -53,4 +53,3 @@ def execTrade(symbol, side, amount, price):
             print('Error: Empty response')
     else:
         print(f'Error: Request failed with status code {response.status_code}')
-        print(response.content)

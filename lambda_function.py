@@ -8,10 +8,10 @@ assetChart = 'ethusd'
 
 def long(price):
     bal = balance.balances('USD')
-    currentPrice = liveprice.currentPrice(assetChart)
-    maxAsset = (bal/currentPrice) * 0.99
-    if maxAsset > 10:
-        maxAsset = 10
+    #currentPrice = liveprice.currentPrice(assetChart)
+    maxAsset = (1500/price)
+    #if maxAsset > 1:
+    #    maxAsset = 1
 
     trade.execTrade(assetChart, 'buy', maxAsset, price)
 
@@ -31,5 +31,3 @@ def lambda_handler(event, context):
         long(price)
     if body_json['strategy'] == 'sell':
         short(price)
-
-long(liveprice.currentPrice(assetChart))
