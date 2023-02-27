@@ -9,9 +9,6 @@ import liveprice
 
 
 def execTrade(symbol, side, amount, price):
-    # Set your API credentials
-
-
     # Set the Sandbox API endpoint and request parameters
     nonce = str(int(time.time() * 1000))
     price = round(price, 2)
