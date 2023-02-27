@@ -5,7 +5,6 @@ import hashlib
 import base64
 import time
 import api
-import liveprice
 
 
 def execTrade(symbol, side, amount, price):
