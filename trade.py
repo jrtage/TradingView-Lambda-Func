@@ -15,10 +15,7 @@ def execTrade(symbol, side, amount, price):
     # Set the Sandbox API endpoint and request parameters
     nonce = str(int(time.time() * 1000))
     price = round(price, 2)
-    if side == 'buy':
-        price += 1
-    if side == 'sell':
-        price -= 1
+
     # Set the order payload
     payload = {
         'request': '/v1/order/new',
@@ -48,6 +45,7 @@ def execTrade(symbol, side, amount, price):
     response = requests.post(api.keys['tradeUrl'], headers=headers)
     if response.status_code == 200:
         try: 
+            print(side, price)
             print(response.json())
         except ValueError:
             print('Error: Empty response')

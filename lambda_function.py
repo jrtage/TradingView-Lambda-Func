@@ -2,6 +2,7 @@ import json
 import balance
 import liveprice
 import trade
+import math
 
 # Declare which chart to grab live price info from
 assetChart = 'ethusd'
@@ -10,7 +11,7 @@ def long(price):
     bal = balance.balances('USD')
     #currentPrice = liveprice.currentPrice(assetChart)
     maxAsset = 1500/price
-    maxAsset = round(maxAsset, 4)
+    maxAsset = math.floor(maxAsset * 1000000) / 1000000
     #if maxAsset > 1:
     #    maxAsset = 1
 
@@ -32,5 +33,3 @@ def lambda_handler(event, context):
         long(price)
     if body_json['strategy'] == 'sell':
         short(price)
-
-long(liveprice.currentPrice(assetChart))
