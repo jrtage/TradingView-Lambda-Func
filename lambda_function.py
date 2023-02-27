@@ -1,6 +1,6 @@
 import json
 import setChart
-import execTrade
+import placeOrder
 
 
 def lambda_handler(event, context):
@@ -9,6 +9,6 @@ def lambda_handler(event, context):
     price = float(body_json['price'])
     assetChart, asset =  setChart(body_json['ticker'])
     if body_json['strategy'] == 'buy':
-        execTrade.long(price, assetChart)
+        placeOrder.long(price, assetChart)
     if body_json['strategy'] == 'sell':
-        execTrade.short(price, assetChart, asset)
+        placeOrder.short(price, assetChart, asset)
