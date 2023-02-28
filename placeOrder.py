@@ -5,7 +5,7 @@ from balance import balances
 # Declare which chart to grab live price info from
 assetPrecision = 6
 numOfCharts = 1
-assetLimit = 10
+assetLimit = 1
 usdBal = 1500
 positionFunds = usdBal / numOfCharts
 
