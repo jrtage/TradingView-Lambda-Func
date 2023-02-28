@@ -25,7 +25,7 @@ Parameters: asset market ('ethusd')
 
 ADD THIS AS YOUR TRADINGVIEW ALERT MESSAGE:
 {
-"ticker": "{{ticker}}"
+"ticker": "{{ticker}}",
 "price": "{{close}}", 
 "strategy": "{{strategy.order.action}}"
 }
