@@ -1,5 +1,5 @@
 import json
-import setChart
+from setChart import setChart
 import placeOrder
 
 

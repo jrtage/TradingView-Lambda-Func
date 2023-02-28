@@ -1,6 +1,6 @@
 import math
-import trade
-import balance
+from trade import execTrade
+from balance import balances
 
 # Declare which chart to grab live price info from
 assetPrecision = 6
@@ -15,16 +15,16 @@ def long(price, assetChart):
     maxAsset = math.floor(maxAsset * (10 ** assetPrecision)) / (10 ** assetPrecision)
     if maxAsset > assetLimit:
         maxAsset = assetLimit
-    if balance.balances('USD') < positionFunds:
+    if balances('USD') < positionFunds:
         print('Insufficient funds for this position')
         return
 
-    trade.execTrade(assetChart, 'buy', maxAsset, price)
+    execTrade(assetChart, 'buy', maxAsset, price)
 
 def short(price, assetChart, asset):
-    bal = balance.balances(asset)
+    bal = balances(asset)
     if bal < 0.01:
         print('No Assets Available To Sell')
         return
 
-    trade.execTrade(assetChart, 'sell', bal, price)
+    execTrade(assetChart, 'sell', bal, price)
