@@ -4,6 +4,7 @@ import placeOrder
 
 
 def lambda_handler(event, context):
+    print('----------------BEGIN CALL----------------')
     body = event['body']
     body_json = json.loads(body)
     price = float(body_json['price'])
@@ -13,3 +14,5 @@ def lambda_handler(event, context):
         placeOrder.long(price, assetChart, timeChart)
     if body_json['strategy'] == 'sell':
         placeOrder.short(price, assetChart, asset, timeChart)
+
+    print('----------------END CALL----------------')

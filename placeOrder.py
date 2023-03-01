@@ -21,7 +21,8 @@ def long(price, assetChart, time):
 
     tradeAmt = execTrade(assetChart, 'buy', maxAsset, price)
 
-    filename = './lasttrades/' + assetChart + time + '.txt'
+    # FIX THIS TO USE A DATABASE
+    filename = './tmp/lasttrades/' + assetChart + time + '.txt'
     with open(filename, 'w') as file:
         file.write(tradeAmt)
 
@@ -32,7 +33,8 @@ def short(price, assetChart, asset, time):
         return
 
     try:
-        filename = './lasttrades/' + assetChart + time + '.txt'
+        # FIX THIS TO USE A DATABASE
+        filename = './tmp/lasttrades/' + assetChart + time + '.txt'
         with open(filename, 'r') as file:
             tradeAmt = float(file.read())
             if tradeAmt < 0.01:
