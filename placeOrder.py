@@ -31,8 +31,15 @@ def short(price, assetChart, asset, time):
         print('No Assets Available To Sell')
         return
 
-    filename = './lasttrades/' + assetChart + time + '.txt'
-    with open(filename, 'r') as file:
-        tradeAmt = float(file.read())
+    try:
+        filename = './lasttrades/' + assetChart + time + '.txt'
+        with open(filename, 'r') as file:
+            tradeAmt = float(file.read())
+            if tradeAmt < 0.01:
+                print('No Assets Available To Sell')
+                return
+    except:
+        print('No Assets Available to sell')
+        return
 
     execTrade(assetChart, 'sell', tradeAmt, price)
