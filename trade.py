@@ -43,6 +43,8 @@ def execTrade(symbol, side, amount, price):
         try: 
             print(side, price)
             print(response.json())
+            jsonResponse = json.loads(response)
+            return(jsonResponse['original_amount'])
         except ValueError:
             print('Error: Empty response')
     else:

@@ -6,11 +6,11 @@ from balance import balances
 assetPrecision = 6
 numOfCharts = 1
 assetLimit = 1
-usdBal = 1500
+usdBal = 1400
 positionFunds = usdBal / numOfCharts
 
 
-def long(price, assetChart):
+def long(price, assetChart, time):
     maxAsset = positionFunds /price
     maxAsset = math.floor(maxAsset * (10 ** assetPrecision)) / (10 ** assetPrecision)
     if maxAsset > assetLimit:
@@ -19,12 +19,20 @@ def long(price, assetChart):
         print('Insufficient funds for this position')
         return
 
-    execTrade(assetChart, 'buy', maxAsset, price)
+    tradeAmt = execTrade(assetChart, 'buy', maxAsset, price)
 
-def short(price, assetChart, asset):
+    filename = './lasttrades/' + assetChart + time + '.txt'
+    with open(filename, 'w') as file:
+        file.write(tradeAmt)
+
+def short(price, assetChart, asset, time):
     bal = balances(asset)
     if bal < 0.01:
         print('No Assets Available To Sell')
         return
 
-    execTrade(assetChart, 'sell', bal, price)
+    filename = './lasttrades/' + assetChart + time + '.txt'
+    with open(filename, 'r') as file:
+        tradeAmt = float(file.read())
+
+    execTrade(assetChart, 'sell', tradeAmt, price)
