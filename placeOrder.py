@@ -1,6 +1,7 @@
 import math
 from trade import execTrade
 from balance import balances
+import dbTrans
 
 # Declare which chart to grab live price info from
 assetPrecision = 6
@@ -19,29 +20,26 @@ def long(price, assetChart, time):
         print('Insufficient funds for this position')
         return
 
-    tradeAmt = execTrade(assetChart, 'buy', maxAsset, price)
+    response = execTrade(assetChart, 'buy', maxAsset, price)
 
-    # FIX THIS TO USE A DATABASE
-    filename = './tmp/lasttrades/' + assetChart + time + '.txt'
-    with open(filename, 'w') as file:
-        file.write(tradeAmt)
+
+    # Write trade amt, cost, chart, and timestamp to database
+    dbTrans.buyOrder(assetChart, time, response)
+    #
+    #
 
 def short(price, assetChart, asset, time):
+    print('checking Balance for ' + asset + '....')
     bal = balances(asset)
-    if bal < 0.01:
+    bal = math.floor(bal * (10 ** assetPrecision)) / (10 ** assetPrecision)
+    print(bal)
+    if bal < 0.001:
         print('No Assets Available To Sell')
         return
 
-    try:
-        # FIX THIS TO USE A DATABASE
-        filename = './tmp/lasttrades/' + assetChart + time + '.txt'
-        with open(filename, 'r') as file:
-            tradeAmt = float(file.read())
-            if tradeAmt < 0.01:
-                print('No Assets Available To Sell')
-                return
-    except:
-        print('No Assets Available to sell')
-        return
+    #Read most recent entry from database for specific asset
+    #Read bool flag for if that position has been sold yet
+    tradeAmt = dbTrans.sellOrder(assetChart, time)
+    tradeAmt = math.floor(tradeAmt * (10 ** assetPrecision)) / (10 ** assetPrecision)
 
     execTrade(assetChart, 'sell', tradeAmt, price)

@@ -42,9 +42,9 @@ def execTrade(symbol, side, amount, price):
     if response.status_code == 200:
         try: 
             print(side, price)
-            print(response.json())
             jsonResponse = response.json()
-            return(jsonResponse['original_amount'])
+            print(jsonResponse)
+            return(jsonResponse)
         except ValueError:
             print('Error: Empty response')
     else:
